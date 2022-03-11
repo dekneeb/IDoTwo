@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> {{ header }} </h1>
+
+<form class="mb-5" method="get">
+    <div class="field has-addons">
+      <div class="control">
+        <!--  Our input will search by name of artist  -->
+        <input class="input" type="text" name="title" placeholder="title" />
+      </div>
+      <div class="control">
+        <input class="button" type="submit" value="Search" />
+      </div>
+    </div>
+    <!--  This anchor tag will redirect back to artist list without a query param -->
+    <a class="button" href="{% url 'items_list' %}">Clear Search</a>
+  </form>
+
+{% for item in items%}
+<a href="{% url 'post_detail' item.pk%}">
+<div class="card">
+    <div><img src="{{item.img}}"></img></div>
+    <div><p>{{item.title}}</p></div>
+</div>
+</a>
+
+{% empty %}
+<h2> No Items for Sale Yet</h2>
+{% endfor %}
+
+
+{% endblock %}

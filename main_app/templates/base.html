@@ -1,17 +1,33 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style/main.css' %}"/>
+    <script src="{% static 'script/main.js' %}" defer></script>
     <title>I Do {% block title %} {% endblock%}</title>
 </head>
 <body>
+    
     <nav class="navbar is-blue" role="'navigation" aria-label="'main navigation">
-        <a class ='navbar-item' href="/">Home</a>
         <a class ='navbar-item' href="/about">About</a>
         <a class ='navbar-item' href="/items/new">Post</a>
-
+        <a class ='navbar-item' href="/items/">Items</a>
+       
+        {% if user.is_authenticated %}
+        <div class="navbar">
+            <span class="'navbar-item"> Welcome: {{user.username}}</span>
+            <a class="nabar-item" href="{% url 'logout'%}">Logout</a>
+        </div>
+        {% else %}
+        <div class="navbar-item">
+            <a class="nabar-item" href="{% url 'login'%}">Login</a>
+            <a class="nabar-item" href="{% url 'signup'%}">Create a New Account</a>
+        </div>
+        {% endif %}
 
     </nav>
     <div class="'container">

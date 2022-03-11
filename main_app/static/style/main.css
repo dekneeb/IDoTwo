@@ -1,0 +1,20 @@
+body{
+    background-color: rgb(212, 241, 245);
+}
+
+h1{
+    display:flex;
+    color: red;
+    justify-content: center;
+}
+
+.navbar-item{
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
+
+.card{
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="item_title">Post Detail</h1>
+
+
+<div class="card">
+<h2>{{item.title}}</h2>
+<img src="{{item.img}}"></img>
+<p>{{item.price}}</p>
+<p>{{item.city}}</p>
+<p>{{item.description}}</p>
+<p>Able to be shipped? : {{item.shipping}}</p>
+</div>
+
+<div><a href='{% url "post_update" item.pk %}'>Edit This Listing</a></div>
+<div><a href='{% url "post_delete" item.pk %}'>Delete This Listing</a></div>
+<div>
+<a href="{%url 'items_list'%}">Back to List Page</a>
+</div>
+{% endblock %}
