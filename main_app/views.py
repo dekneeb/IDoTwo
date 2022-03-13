@@ -1,18 +1,24 @@
 from pdb import post_mortem
-from django.shortcuts import render
+import re
+# from xml.etree.ElementTree import Comment
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
-from .models import Item, Photo
+from .models import Item, Comment
+from .forms import CommentForm, SignUpForm
 from django.shortcuts import redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 import uuid
 import boto3
+import os
+from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 
@@ -24,7 +30,7 @@ class About(TemplateView):
 
 class ItemCreate(CreateView):
     model = Item
-    fields = ['title', 'img', 'city', 'description', 'price', 'shipping']
+    fields = ['title', 'city', 'description', 'price', 'shipping', 'photos']
     template_name = 'create_post.html'
     success_url = '/items/'
 
@@ -56,10 +62,11 @@ class ItemList(TemplateView):
 class PostDetail(DetailView):
     model = Item
     template_name= 'post_detail.html'
+    
 
 class PostUpdate(UpdateView):
     model = Item
-    fields = ['title', 'img', 'city', 'description', 'price', 'shipping']
+    fields = ['title', 'city', 'description', 'price', 'shipping']
     template_name = 'post_update.html'
     success_url = '/items/'
 
@@ -71,7 +78,7 @@ class PostDelete(DeleteView):
 
 class Signup(View):
     def get(self,request):
-        form = UserCreationForm()
+        form = SignUpForm()
         context = {"form" : form }
         return render(request, "registration/signup.html", context)
 
@@ -84,7 +91,31 @@ class Signup(View):
             return redirect('items_list')
         else:
             context = {"form" : form}
-            return render(request, "registartion/signup.html", context)
+            return render(request, "registration/signup.html", context)
 
-class AddPhoto():
+
+class AddCommentView(CreateView):
+    model = Comment
+    template_name = 'add_comment.html'
+    success_url = reverse_lazy('items_list')
+    fields = '__all__'
+
+    def form_valid(self, form):
+        form.instance.item_id = self.kwargs['pk']
+        return super().form_valid(form)
+
+
+class UserEditView(UpdateView):
+    form_class=UserChangeForm
+    template_name='registration/edit_profile.html'
+    succes_url=reverse_lazy('items_list')
+
+    def get_object(self):
+        return self.request.user
+
+
+class Profile(TemplateView):
+    template_name='profile.html'
     
+
+

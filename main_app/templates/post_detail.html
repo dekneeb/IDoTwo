@@ -3,18 +3,51 @@
 {% block content %}
 <h1 class="item_title">Post Detail</h1>
 
+    <h2>{{item.title}}</h2><small> by <a href='{% url "profile" %}'>{{item.user}}</a></small><br/>
 
-<div class="card">
-<h2>{{item.title}}</h2>
-<img src="{{item.img}}"></img>
-<p>{{item.price}}</p>
-<p>{{item.city}}</p>
-<p>{{item.description}}</p>
-<p>Able to be shipped? : {{item.shipping}}</p>
-</div>
+   <img src="{{item.photos.url}}" /> <br/><br/>
+    <p>Price: ${{item.price}}</p>
+    <p>Location: {{item.city}}</p>
+    <p>Description: {{item.description}}</p>
+    <p>
+    
+        Able to be shipped?  
+        {% if item.shipping == True%}: 
+            <p>Yes</p>
+        {% else%}
+            <p>No</p>
+    </p>
+        {% endif %}
+<br/>
 
-<div><a href='{% url "post_update" item.pk %}'>Edit This Listing</a></div>
-<div><a href='{% url "post_delete" item.pk %}'>Delete This Listing</a></div>
+<hr>
+<br/>
+
+<h2>Comments</h2>
+
+{% if not item.comments.all%}
+No Comments Yet... <a href="{% url 'comment' item.pk %}">Add Comment</a>
+
+{% else %}
+<a href="{% url 'comment' item.pk %}">Add Comment</a><br/><br/><br/><br/>
+    {% for comment in item.comments.all %}
+        {{user.username}} - <strong>{{comment.created_on}}</strong> <br/>
+        {{comment.body}}
+        <hr><br/>
+    {% endfor %}
+    <a href="{% url 'comment' item.pk %}">Add Comment</a><br/><br/>
+{% endif %}
+<br/><br/>
+
+
+<br/>
+
+    {% if user.id == item.user.id %}
+
+        <div><a href='{% url "post_update" item.pk %}'>Edit This Listing</a></div>
+        <div><a href='{% url "post_delete" item.pk %}'>Delete This Listing</a></div>
+
+    {% endif %}
 <div>
 <a href="{%url 'items_list'%}">Back to List Page</a>
 </div>

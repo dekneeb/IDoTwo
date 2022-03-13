@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add photos to your post</h1>
+{% for photo in taco.photo_set.all %}
+<img class="responsive-img card-panel" src="{{photo.url}}">
+{% empty %}
+<div class="card-panel teal-text center-align">No Taco Photos Uploaded</div>
+{% endfor %}
+
+
+{% endblock %}

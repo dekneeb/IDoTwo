@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.conf import settings
 
 
 urlpatterns=[ 
@@ -11,5 +12,8 @@ urlpatterns=[
     path('post/<int:pk>/update', views.PostUpdate.as_view(), name='post_update'),
     path('post/<int:pk>/', views.PostDelete.as_view(), name='post_delete'),
     path('accounts/signup', views.Signup.as_view(), name='signup'),
-    path('post<int:pk>/add_photo/', views.AddPhoto.as_view(), name="add_photo")
+    path('post/<int:pk>/comment', views.AddCommentView.as_view(), name ='comment'),
+    path('edit_profile/', views.UserEditView.as_view(), name='edit_profile'),
+    path('view_profile', views.Profile.as_view(), name='profile')
+
 ]

@@ -20,10 +20,16 @@
 {% for item in items%}
 <a href="{% url 'post_detail' item.pk%}">
 <div class="card">
-    <div><img src="{{item.img}}"></img></div>
-    <div><p>{{item.title}}</p></div>
-</div>
+    {% if item.photos %}
+    <img src="{{ item.photos.url }}">
+    {% endif %}
+    <p><strong>{{item.title}}</strong> by {{item.user}} </p>
 </a>
+    <p>@ {{item.created_on}}</p>
+    {{item.description | slice:":50"}}
+    
+</div>
+
 
 {% empty %}
 <h2> No Items for Sale Yet</h2>
