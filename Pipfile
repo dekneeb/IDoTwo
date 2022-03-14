@@ -7,10 +7,11 @@ name = "pypi"
 django = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+django-heroku = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.10"
-
-
