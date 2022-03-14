@@ -1,11 +1,19 @@
 body{
-    background-color: rgb(212, 241, 245);
+    background-color: rgb(255, 255, 255);
+   
 }
 
 h1{
     display:flex;
-    color: red;
+    color: rgb(202, 120, 250);
     justify-content: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.detail_body{
+    
+    margin-left: 20vw;
+    margin-right: 20vw;
 }
 
 .navbar-item{
@@ -13,4 +21,136 @@ h1{
     text-decoration: none;
     text-align: center;
 }
+
+.sent_message{
+    background-color: lightgrey;
+    border-radius: 5px;
+    padding: 10px 25px;
+    width: 25%;
+
+}
+.received_message{
+    background-color: rgb(130, 208, 228);
+    border-radius: 5px;
+    padding: 10px 25px;
+    width: 25%;
+    float: right;
+}
+
+.navbar{
+    background-color: pink;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.item_card{
+    display: flex;
+    justify-content: center;
+
+}
+
+.container {
+    padding: 40px;
+    padding-right: 0;
+  }
+
+.picture{
+    border-radius: 5px;
+    
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    justify-content: center;
+    gap: 30px;
+  }
+
+.photo{
+    display: flex;
+    justify-content: center;
+}
+.right_side_nav{
+    float: right;
+}
+
+.all_card p{
+    display: flex;
+    justify-content: center;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 0;
+    transition: width 0.6s linear;
+  }
+  
+nav.active ul {
+    width: 100%;
+  }
+  
+nav ul li {
+    transform: rotateY(0deg);
+    opacity: 0;
+    transition: transform 0.6s linear, opacity 0.6s linear;
+    color: white;
+  }
+  
+nav.active ul li {
+    opacity: 1;
+    
+  }
+  
+nav ul a {
+    position: relative;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+.icon {
+    background-color: pink;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    height: 30px;
+    width: 30px;
+  }
+  
+.icon:focus {
+    outline: 0;
+  }
+  
+.icon .line {
+    background-color: #81b29a;
+    height: 2px;
+    width: 20px;
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    transition: transform 0.6s linear;
+  }
+  
+.icon .line2 {
+    top: auto;
+    bottom: 10px;
+  }
+  
+nav.active .icon .line1 {
+    transform: rotate(-765deg) translateY(5.5px);
+  }
+  
+nav.active .icon .line2 {
+    transform: rotate(765deg) translateY(-5.5px);
+  }
+
+.list .item_card:hover {
+    transform: scale(1.1);
+    z-index: 10;
+  }
+
+
 

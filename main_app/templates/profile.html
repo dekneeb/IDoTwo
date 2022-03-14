@@ -1,9 +1,9 @@
 {% extends 'base.html'%}
 
 {% block content %}
-<h1>{{user.username}}'s Profile</h1>
-
-<button class="dm_buttom">direct message</button>
+<h1>{{user}}'s Profile</h1>
+<a href="{% url 'createthread' %}">
+<button class="dm_buttom">direct message</button></a>
 
 
 {% endblock %}

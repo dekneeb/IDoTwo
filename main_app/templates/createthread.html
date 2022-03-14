@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <a href="{% url 'inbox' %}">Back to your inbox</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <h3>Start a Conversation</h3>
+        </div>
+    </div>
+<div class="row">
+    <div class="column">
+        <form method="POST">
+            {% csrf_token %}
+            <p>Enter the username for the person you would like to talk to</p>
+            {{ form.as_p }}
+            <button class="button" type="submit">Continue</button>
+        </form>
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

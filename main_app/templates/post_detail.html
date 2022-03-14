@@ -1,24 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="item_title">Post Detail</h1>
-
-    <h2>{{item.title}}</h2><small> by <a href='{% url "profile" %}'>{{item.user}}</a></small><br/>
-
-   <img src="{{item.photos.url}}" /> <br/><br/>
-    <p>Price: ${{item.price}}</p>
-    <p>Location: {{item.city}}</p>
-    <p>Description: {{item.description}}</p>
-    <p>
+<h1 class="item_title">{{item.title}}</h1>
     
-        Able to be shipped?  
-        {% if item.shipping == True%}: 
-            <p>Yes</p>
+
+    {% if item.photos %}
+    <div class="photo"><img class="picture" src="{{ item.photos.url }}"></div>
+    {% endif %}
+    <br/><br/>
+    <div class=" detail_body">
+    <small> by @<a class="post_author" href='{% url "profile" %}'>{{item.user}}</a></small><br/>
+    Price: ${{item.price}} || Location: {{item.city}}
+    
+    
+    <p>
+        Shipping available? 
+        {% if item.shipping == True%} 
+            Yes
         {% else%}
-            <p>No</p>
+            No
     </p>
         {% endif %}
+        <p>Description: {{item.description}}</p>
 <br/>
+{{user.id}}
+{{item.user.id}}
 
 <hr>
 <br/>
@@ -38,7 +44,7 @@ No Comments Yet... <a href="{% url 'comment' item.pk %}">Add Comment</a>
     <a href="{% url 'comment' item.pk %}">Add Comment</a><br/><br/>
 {% endif %}
 <br/><br/>
-
+</div>
 
 <br/>
 

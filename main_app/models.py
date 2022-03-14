@@ -1,5 +1,7 @@
+from time import timezone
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 # Create your models here.
 
@@ -31,7 +33,6 @@ class Comment(models.Model):
     name = models.CharField(max_length=80)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
     post = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='comments')
 
     class Meta:
@@ -39,6 +40,23 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)
+
+class ThreadModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+
+class MessageModel(models.Model):
+    thread = models.ForeignKey('ThreadModel', related_name='+', on_delete=models.CASCADE, blank = True, null = True)
+    sender_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+    receiver_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+    body = models.CharField(max_length=1000)
+    image = models.ImageField(upload_to='static/message_photos', blank=True, null=True)
+    date=models.DateTimeField(auto_now_add=True)
+    is_read=models.BooleanField(default=False)
+
+class Profile(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
+
 
 
 

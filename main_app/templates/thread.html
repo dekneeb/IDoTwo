@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            {% if thread.receiver == request.user %}
+                <h5>@{{ thread.user }}</h5>
+            {% else %}
+                <h5>@{{ thread.receiver }} </h5>
+            {% endif %}
+        </div>
+    </div>
+    {% if message_list.all.count == 0 %}
+        <div class="row">
+            <div class="column">
+                <p>No Messages</p>
+            </div>
+        </div>
+    {% for message in message_list %}
+    <div class="row">
+        <div class="column">
+            {% if message.send_user == request.user %}
+                <div class="sent_message">
+                    <p>{{ message.body}}</p>
+                </div>
+            {% elif message.receiver_user == request.user %}
+                <div class="received_message">
+                    <p>{{ message.body }}</p>
+                </div>
+            {% endif %}
+                
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="card">
+            <form method="POST" action="{% url 'createmessage' thread.pk%}" enctype="multipart/form-data">
+                {% csrf_token%}
+                {{ form.as_p}}
+
+                <button type="submit" class="button">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

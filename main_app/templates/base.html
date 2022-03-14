@@ -8,25 +8,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'style/main.css' %}"/>
     <script src="{% static 'script/main.js' %}" defer></script>
-    <title>I Do {% block title %} {% endblock%}</title>
+    <title> {% block title %} I Do {% endblock%}</title>
 </head>
 <body>
+    {% if user.is_authenticated %}
     
-    <nav class="navbar is-blue" role="'navigation" aria-label="'main navigation">
-        <a class ='navbar-item' href="/about">About</a>
-        <a class ='navbar-item' href="/items/new">Post</a>
-        <a class ='navbar-item' href="/items/">Items</a>
+ <nav class="active navbar" id="nav">
+    
+    <a class=" navbar-item right_side_nav" href="{% url 'logout'%}">Logout</a>
+    <span>
+    <button class="icon" id="toggle">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+    </button>
+    <span class="navbar-item"> Welcome: {{user.username}}</span>
+    <ul>
+        <li><a class ='navbar-item'  id='toggle' href="/about">About</a></li>
+        <li><a class ='navbar-item' href="/items/new">Post</a></li>
+        <li><a class ='navbar-item' href="/items/">Items</a></li>
+        <li><a class ='navbar-item' href="/inbox/">Inbox</a></li>
+        <li><a class="navbar-item" href="{% url 'edit_profile'%}">Edit Profile</a>
+    </ul>
+</span>
        
-        {% if user.is_authenticated %}
-        <div class="navbar">
-            <span class="'navbar-item"> Welcome: {{user.username}}</span>
-            <a class="nabar-item" href="{% url 'logout'%}">Logout</a>
-            <a class="nabar-item" href="{% url 'edit_profile'%}">Edit Profile</a>
-        </div>
+       
+</nav>
         {% else %}
         <div class="navbar-item">
-            <a class="nabar-item" href="{% url 'login'%}">Login</a>
-            <a class="nabar-item" href="{% url 'signup'%}">Create a New Account</a>
+            <a class="navbar-item" href="{% url 'login'%}">Login</a>
+            <a class="navbar-item" href="{% url 'signup'%}">Create a New Account</a>
         </div>
         {% endif %}
 

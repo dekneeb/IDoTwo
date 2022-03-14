@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="column">
+            <h3>Your Conversations</h3>
+        </div>
+    </div>
+
+
+<div class ='row'>
+    <div class="column">
+        <form method="GET" action="{% url 'createthread' %}">
+            <button class="button" type="submit"> Start a Conversation</button>
+        </form>
+    </div>
+</div>
+
+{% for thread in threads.all %}
+
+<div class="row">
+    <div class="card">
+        <h5>{{ thread.user }} - {{ thread.receiver }}</h5>
+        <a href="{% url 'thread' thread.pk%}"></a>
+    </div>
+</div>
+
+</div>
+{% endfor %}
+{% endblock %}
