@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
 import os
 import environ
 from dotenv import load_dotenv
@@ -143,4 +144,8 @@ AWS_ACCESS_KEY_ID=os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY=os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = 'idotwo'
 AWS_QUERYSTRING_AUTH = False
+
+
+
+django_heroku.settings(locals())
 
