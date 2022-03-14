@@ -18,16 +18,22 @@
                 <p>No Messages</p>
             </div>
         </div>
+    {% endif %}
     {% for message in message_list %}
+   
     <div class="row">
         <div class="column">
-            {% if message.send_user == request.user %}
+            {% if message.sender_user == request.user %}
                 <div class="sent_message">
-                    <p>{{ message.body}}</p>
+                    <ul>
+                    <li><p>{{ message.body}}</p></li>
+              
                 </div>
             {% elif message.receiver_user == request.user %}
                 <div class="received_message">
-                    <p>{{ message.body }}</p>
+                    
+                    <li><p>{{ message.body }}</p></li>
+                </ul>
                 </div>
             {% endif %}
                 
@@ -35,9 +41,10 @@
     </div>
     {% endfor %}
 
+    
     <div class="row">
         <div class="card">
-            <form method="POST" action="{% url 'createmessage' thread.pk%}" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'create_message' thread.pk%}" enctype="multipart/form-data">
                 {% csrf_token%}
                 {{ form.as_p}}
 

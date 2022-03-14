@@ -19,7 +19,7 @@
         <form method="POST">
             {% csrf_token %}
             <p>Enter the username for the person you would like to talk to</p>
-            {{ form.as_p }}
+            {{ form }}
             <button class="button" type="submit">Continue</button>
         </form>
     </div>

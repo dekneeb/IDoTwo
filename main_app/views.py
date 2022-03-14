@@ -6,7 +6,7 @@ from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
-from .models import Item, Comment, ThreadModel, MessageModel
+from .models import Item, Comment, ThreadModel, MessageModel, UserProfile
 from .forms import CommentForm, SignUpForm, ThreadForm, MessageForm
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
@@ -17,6 +17,7 @@ from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.contrib.auth.models import User
+# from django.dispatch import receiver
 
 
 
@@ -96,9 +97,10 @@ class Signup(View):
 
 class AddCommentView(CreateView):
     model = Comment
+    form_class= CommentForm
     template_name = 'add_comment.html'
     success_url = reverse_lazy('items_list')
-    fields = '__all__'
+    # fields = '__all__'
 
     def form_valid(self, form):
         form.instance.item_id = self.kwargs['pk']
@@ -114,8 +116,18 @@ class UserEditView(UpdateView):
         return self.request.user
 
 
-class Profile(TemplateView):
-    template_name='profile.html'
+class Profile(View):
+    def get(self, request, pk, *args, **kwargs):
+        profile=UserProfile.objects.get(pk=pk)
+        user = profile.user
+        posts = Item.objects.filter(User=user).order_by('created_on')
+
+        context ={
+            'user' : user,
+            'profile' : profile,
+            'posts' : posts
+        }
+        return render(request, 'profile.html', context)
 
 
 class ListThreads(View):
@@ -135,17 +147,17 @@ class CreateThread(View):
         }
         return render(request, 'createthread.html', context)
 
-    def post(self, request, *args, **kwards):
+    def post(self, request, *args, **kwargs):
         form = ThreadForm(request.POST)
         username = request.POST.get('username')
 
         try: 
             receiver = User.objects.get(username =username)
-            if ThreadModel.objects.filter(user = request.user, receiver=receiver).exists():
-                thread = ThreadModel.objects.filter(user=request.user, receiver = receiver)[0]
+            if ThreadModel.objects.filter(user=request.user, receiver=receiver).exists():
+                thread = ThreadModel.objects.filter(user=request.user, receiver=receiver)[0]
                 return redirect ('thread', pk=thread.pk)
-            elif ThreadModel.objects.filter(user=receiver, receiver=request.user).exitst():
-                thread = ThreadModel.objects.filter(user=receiver, receiver = request.user)[0]
+            elif ThreadModel.objects.filter(user=receiver, receiver=request.user).exists():
+                thread = ThreadModel.objects.filter(user=receiver, receiver=request.user)[0]
                 return redirect ('thread', pk=thread.pk)
 
             if form.is_valid():
@@ -153,6 +165,7 @@ class CreateThread(View):
                     user=request.user,
                     receiver=receiver
                     )
+                print(thread)
                 thread.save()
 
             return redirect('thread', pk=thread.pk)
@@ -165,6 +178,7 @@ class ThreadView(View):
         form =MessageForm() 
         thread = ThreadModel.objects.get(pk=pk)
         message_list=MessageModel.objects.filter(thread__pk__contains=pk)
+      
         context ={
             'thread' : thread,
             'form' : form,
@@ -177,10 +191,10 @@ class CreateMessage(View):
     def post(self, request, pk, *args, **kwargs):
         thread = ThreadModel.objects.get(pk=pk)
         if thread.receiver == request.user:
-            receiver == thread.user
+            receiver = thread.user
         else:
-            receiver == thread.receiver
-        
+            receiver = thread.receiver
+        print(receiver)
         message=MessageModel(
             thread=thread,
             sender_user = request.user,
