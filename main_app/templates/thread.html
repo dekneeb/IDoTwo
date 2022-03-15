@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="card">
+        <div class="card col-md-12 mt-5 p-3 shadow-sm">
             {% if thread.receiver == request.user %}
                 <h5>@{{ thread.user }}</h5>
             {% else %}
@@ -13,45 +13,46 @@
         </div>
     </div>
     {% if message_list.all.count == 0 %}
-        <div class="row">
-            <div class="column">
-                <p>No Messages</p>
+        <div class="row my-5">
+            <div class="col-md-12">
+                <p class="emtpy-text">No Messages</p>
             </div>
         </div>
     {% endif %}
     {% for message in message_list %}
-   
     <div class="row">
-        <div class="column">
+        <div class="col-md-12 my-1">
             {% if message.sender_user == request.user %}
-                <div class="sent_message">
-                    <ul>
-                    <li><p>{{ message.body}}</p></li>
-              
+                <div class="sent_message my-3" style="float: right">
+                    <p>{{ message.body}}</p>
                 </div>
             {% elif message.receiver_user == request.user %}
-                <div class="received_message">
-                    
-                    <li><p>{{ message.body }}</p></li>
-                </ul>
+                <div class="received_message my-3" style="float: left">
+                    <p>{{ message.body }}</p>
                 </div>
+            </div>
+    </div>
+       
             {% endif %}
                 
-        </div>
-    </div>
     {% endfor %}
 
-    
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <div class="row">
-        <div class="card">
+        <div class="card col-md-12 shadow-sm p-3">
             <form method="POST" action="{% url 'create_message' thread.pk%}" enctype="multipart/form-data">
                 {% csrf_token%}
                 {{ form.as_p}}
-
-                <button type="submit" class="button">Send Message</button>
+                <div class="d-grid gap-2 mt-3">
+                <button type="submit" class="btn btn-light">Send Message</button>
+                </div>
             </form>
         </div>
     </div>
+
 
 </div>
 

@@ -6,15 +6,25 @@
 <form class="search" method="get">
     <div class="field">
       <div class="control">
-        <input class="input" type="text" name="title" placeholder="title" />
+        <input class="input" type="text" name="title" placeholder="Search by Title" />
       </div>
       <div class="control">
         <input class="button" type="submit" value="Search" />
       </div>
     </div>
+    <div class="field">
+        <div class="control">
+        <input class="input" type="text" name="city" placeholder="Search by City" />
+        </div>
+        <div class="control">
+        <input class="button" type="submit" value="Search" />
+        </div>
+    </div>
     <a class="button" href="{% url 'items_list' %}">Clear Search</a>
   </form>
 <div class="list">
+
+
 {% for item in items%}
 <div class="item_card">
     <div class="all_card">
@@ -24,7 +34,7 @@
         <div class="photo">
             <img class="picture" src="{{ item.photos.url }}"></div>
         {% endif %}
-        <p><strong>{{item.title}} </strong> by {{item.user}} </p> 
+        <p><strong>{{item.title}} </strong> &nbsp; by {{item.user}} </p> 
         </a>
             <p>@ {{item.created_on}}</p> 
             {{item.city}} ||

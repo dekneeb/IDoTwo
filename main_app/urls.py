@@ -14,10 +14,12 @@ urlpatterns=[
     path('accounts/signup', views.Signup.as_view(), name='signup'),
     path('post/<int:pk>/comment', views.AddCommentView.as_view(), name ='comment'),
     path('edit_profile/', views.UserEditView.as_view(), name='edit_profile'),
-    path('view_profile/', views.Profile.as_view(), name='profile'),
+    path('profile/', views.Profile.as_view(), name='profile'),
     path('inbox/', views.ListThreads.as_view(), name='inbox'),
     path('inbox/createthread', views.CreateThread.as_view(), name='createthread' ),
     path('inbox/<int:pk>/', views.ThreadView.as_view(), name='thread'),
     path('inbox/<int:pk>/createmessage', views.CreateMessage.as_view(), name='create_message'),
+    path('notification/<int:notification_pk>/post/<int:post_pk>', views.PostNotification.as_view(), name='post-notification'),
+    path('notification/<int:notification_pk>/thread/<int:object_pk>', views.ThreadNotification.as_view(), name='thread-notification')
 
 ]

@@ -15,17 +15,6 @@ class CommentForm(forms.ModelForm):
             'body' : forms.Textarea(attrs = {'class' : 'form-control'}),
         }
 
-    #      comment = forms.CharField(
-    #     label='',
-    #     widget=forms.Textarea(attrs={
-    #         'rows': '3',
-    #         'placeholder': 'Leave a comment...'
-    #     })
-    # )
-    # class Meta:
-    #     model = Comment
-    #     fields = ['comment']
-
 class SignUpForm(UserCreationForm):
     email = forms.EmailField()
     first_name = forms.CharField(max_length=100)

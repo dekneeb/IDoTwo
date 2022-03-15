@@ -12,6 +12,7 @@ gunicorn = "*"
 whitenoise = "*"
 environ = "*"
 django-environ = "*"
+boto3 = "*"
 
 [dev-packages]
 

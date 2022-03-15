@@ -1,4 +1,5 @@
 from time import timezone
+from turtle import onclick
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
@@ -12,7 +13,7 @@ from django.dispatch import receiver
 class Item(models.Model):
 
     title = models.CharField(max_length=100)
-    city = models.CharField(max_length=15)
+    city = models.CharField(max_length=40)
     description = models.TextField(max_length = 500)
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     shipping = models.BooleanField(default=False)
@@ -43,20 +44,6 @@ class Comment(models.Model):
     def __str__(self):
         return '%s - %s' % (self.post.title, self.name)
 
-    # name = models.TextField()
-    # created_on = models.DateTimeField(auto_now_add=True)
-    # post = models.ForeignKey('Item', on_delete=models.CASCADE)
-    # parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='+')
-
-    # @property
-    # def children(self):
-    #     return Comment.object.filter(parent=self).order_by('created_on').all()
-
-    # @property
-    # def is_parent(self):
-    #     if self.parent is None:
-    #         return True
-    #     return False
 
 class ThreadModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
@@ -87,6 +74,19 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+class Notification(models.Model):
+    #1 = DM, 2 = comment, 3=like
+    notification_type=models.IntegerField()
+    to_user=models.ForeignKey(User, related_name='notification_to', on_delete=models.CASCADE, null=True)
+    from_user=models.ForeignKey(User, related_name='notification_from', on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey('Item', on_delete=models.CASCADE, related_name="+", blank=True, null=True)
+    thread=models.ForeignKey('ThreadModel', on_delete=models.CASCADE, related_name="+", blank=True, null=True)
+    comment = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name="+", blank=True, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+    user_has_seen=models.BooleanField(default=False)
+
 
 
 

@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(255, 255, 255);
+    background-color: linear-gradient(rgb(255, 182, 210), rgb(255, 255, 255)) ;
    
 }
 
@@ -17,28 +17,30 @@ h1{
 }
 
 .navbar-item{
-    color: black;
+    color: rgb(152, 184, 131);
     text-decoration: none;
     text-align: center;
+    font-size: 20px;
 }
 
 .sent_message{
-    background-color: lightgrey;
-    border-radius: 5px;
-    padding: 10px 25px;
-    width: 25%;
-
-}
-.received_message{
     background-color: rgb(130, 208, 228);
     border-radius: 5px;
     padding: 10px 25px;
     width: 25%;
-    float: right;
+    margin-bottom: 10px;
+
+}
+.received_message{
+    background-color: lightgrey;
+    border-radius: 5px;
+    padding: 10px 25px;
+    width: 25%;
+    margin-bottom: 10px;
 }
 
 .navbar{
-    background-color: pink;
+    background-color: rgb(255, 182, 210);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -60,6 +62,8 @@ h1{
     
 }
 
+
+
 .list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -72,38 +76,39 @@ h1{
     justify-content: center;
     
 }
-.right_side_nav{
-    float: right;
-}
+
 
 .all_card p{
     display: flex;
     justify-content: center;
 }
 
-nav ul {
-    display: flex;
-    list-style-type: none;
+nav.active ul {
     padding: 0;
     margin: 0;
     width: 0;
     transition: width 0.6s linear;
   }
   
-nav.active ul {
+nav ul {
     width: 100%;
+    list-style-type: none;
+    display: flex;
   }
   
-nav ul li {
+nav.active ul li {
     transform: rotateY(0deg);
     opacity: 0;
     transition: transform 0.6s linear, opacity 0.6s linear;
     color: white;
-  }
+    list-style-type: none;
   
-nav.active ul li {
+  }
+
+  
+nav ul li {
     opacity: 1;
-    
+    list-style-type: none;
   }
   
 nav ul a {
@@ -119,35 +124,10 @@ nav ul a {
     cursor: pointer;
     padding: 0;
     position: relative;
-    height: 30px;
-    width: 30px;
   }
   
 .icon:focus {
     outline: 0;
-  }
-  
-.icon .line {
-    background-color: #81b29a;
-    height: 2px;
-    width: 20px;
-    position: absolute;
-    top: 10px;
-    left: 5px;
-    transition: transform 0.6s linear;
-  }
-  
-.icon .line2 {
-    top: auto;
-    bottom: 10px;
-  }
-  
-nav.active .icon .line1 {
-    transform: rotate(-765deg) translateY(5.5px);
-  }
-  
-nav.active .icon .line2 {
-    transform: rotate(765deg) translateY(-5.5px);
   }
 
 .list .item_card:hover {
@@ -156,4 +136,69 @@ nav.active .icon .line2 {
   }
 
 
+.notification-badge{
+      transition: 0.3s;
+  }
+.notification-badge:hover {
+      cursor: pointer;
+      opacity: 0.75;
+      transition: 0.3s;
+  }
 
+.dropdown{
+      position: relative;
+      display: inline-block;
+
+}
+.dropdown-content{
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 325px;
+    box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 0.9rem;
+}
+
+.dropdown-content a{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover{
+    background-color: #ddd;
+}
+
+.dropdown-item-parent{
+    position: relative;
+    display: block;
+}
+
+.dropdown-item-close{
+    position: aboslute;
+    top: 0;
+    right: 0;
+    font-size: 1.8rem;
+    padding-right: 5px;
+    transition: 0.3s;
+}
+
+.dropdown-item-close:hover{
+   color: red;
+   transition: 0.3s;
+   cursor: pointer;
+}
+
+.inbox-icon.container{
+    margin-right: 15px;
+
+}
+
+.inbox.icon{
+    transition: 0.5s;
+
+}
+
+.inbox.icon:hover{
+    cursor: pointer;
+}

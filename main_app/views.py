@@ -6,7 +6,7 @@ from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
-from .models import Item, Comment, ThreadModel, MessageModel, UserProfile
+from .models import Item, Comment, ThreadModel, MessageModel, UserProfile, Notification
 from .forms import CommentForm, SignUpForm, ThreadForm, MessageForm
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
@@ -49,11 +49,25 @@ class ItemList(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
 
+        
         title = self.request.GET.get('title')
         print(title)
         if title != None:
             context['items'] = Item.objects.filter(title__icontains=title)
             context['header'] = f"Results for {title}"
+        else:
+            context['items'] = Item.objects.all()
+            context['header'] = "I Do Two's"
+        return context
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+
+        city = self.request.GET.get('city')
+
+        if city != None:
+            context['items'] = Item.objects.filter(city__icontains=city)
+            context['header'] = f"Results for {city}"
         else:
             context['items'] = Item.objects.all()
             context['header'] = "I Do Two's"
@@ -100,11 +114,16 @@ class AddCommentView(CreateView):
     form_class= CommentForm
     template_name = 'add_comment.html'
     success_url = reverse_lazy('items_list')
-    # fields = '__all__'
 
     def form_valid(self, form):
-        form.instance.item_id = self.kwargs['pk']
+        form.instance.post_id = self.kwargs['pk']
+        form.instance.name = self.request.user
+
+        # notification = Notification.objects.create(notification_type=2, from_user=self.request.user, to_user=Comment.post.user, post=Comment.post)
+
         return super().form_valid(form)
+
+        
 
 
 class UserEditView(UpdateView):
@@ -116,18 +135,10 @@ class UserEditView(UpdateView):
         return self.request.user
 
 
-class Profile(View):
-    def get(self, request, pk, *args, **kwargs):
-        profile=UserProfile.objects.get(pk=pk)
-        user = profile.user
-        posts = Item.objects.filter(User=user).order_by('created_on')
+class Profile(TemplateView):
+   
+    template_name='profile.html'
 
-        context ={
-            'user' : user,
-            'profile' : profile,
-            'posts' : posts
-        }
-        return render(request, 'profile.html', context)
 
 
 class ListThreads(View):
@@ -204,5 +215,35 @@ class CreateMessage(View):
 
         message.save()
 
+        notification = Notification.objects.create(
+            notification_type=1,
+            from_user = request.user,
+            to_user = receiver,
+            thread=thread
+            )
+
         return redirect('thread', pk=pk)
+
+class PostNotification(View):
+    def get(self, request, notification_pk, post_pk, *args, **kwargs):
+        notification = Notification.objects.get(pk=notification_pk)
+        post = Item.objects.get(pk = post_pk)
+
+        notification.user_has_seen = True
+        notification.save()
+
+        return redirect('post_detail', pk=post_pk)
+
+class ThreadNotification(View):
+    def get(self, request, notification_pk, object_pk, *args, **kwargs):
+        notification = Notification.objects.get(pk=notification_pk)
+        thread = ThreadModel.objects.get(pk = object_pk)
+
+        notification.user_has_seen = True
+        notification.save()
+
+        return redirect('thread', pk=object_pk)
+
+
+
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Item, Comment, UserProfile
+from .models import Item, Comment, UserProfile, Notification
 
 
 
@@ -7,6 +7,7 @@ from .models import Item, Comment, UserProfile
 admin.site.register(Item)
 admin.site.register(Comment)
 admin.site.register(UserProfile)
+admin.site.register(Notification)
 
 
 
