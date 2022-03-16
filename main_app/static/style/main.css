@@ -3,12 +3,14 @@ body{
    
 }
 
-h1{
+h1, h4{
     display:flex;
     color: rgb(202, 120, 250);
     justify-content: center;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+
 
 .detail_body{
     
@@ -42,6 +44,8 @@ h1{
 .navbar{
     background-color: rgb(255, 182, 210);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    justify-content: space-between;
 }
 
 .item_card{
@@ -89,11 +93,19 @@ nav.active ul {
     width: 0;
     transition: width 0.6s linear;
   }
+
+
   
 nav ul {
     width: 100%;
     list-style-type: none;
+    position: relative;
+    right: 100px;
+    background-color: rgb(255, 182, 210);
+    width: 450px;
     display: flex;
+    transition: transform 0.6s linear, opacity 0.6s linear;
+    
   }
   
 nav.active ul li {
@@ -103,12 +115,15 @@ nav.active ul li {
     color: white;
     list-style-type: none;
   
+  
   }
 
   
 nav ul li {
+    transform: rotateY(0deg);
     opacity: 1;
     list-style-type: none;
+    transition: transform 0.6s linear, opacity 0.6s linear;
   }
   
 nav ul a {
@@ -117,6 +132,32 @@ nav ul a {
     text-decoration: none;
     margin: 0 10px;
   }
+
+.form{
+    display: flex;
+    justify-content: center;
+}
+.onebutton{
+    display: flex;
+    justify-content: center;
+}
+.onebutton.active{
+    display: none;
+    
+}
+
+.filter{
+    display: none;
+
+}
+
+.filter.active{
+    display: flex;
+    justify-content: center;
+
+}
+
+
   
 .icon {
     background-color: pink;
@@ -124,6 +165,11 @@ nav ul a {
     cursor: pointer;
     padding: 0;
     position: relative;
+  }
+
+.icon.active{
+    transition: 0.9s;
+    transform: rotateY(180deg)
   }
   
 .icon:focus {
@@ -150,8 +196,37 @@ nav ul a {
       display: inline-block;
 
 }
+.post{
+    margin-left: 130px;
+}
+
+.edit-button{
+    background-color: white;
+    border: 1px gray;
+
+}
+
+.frame{
+    background-image: url('static/images/frame.png');
+}
+
+.homeicon{
+    height: 400px;
+    width: 400px;
+    border-radius: 5px
+
+}
+.home{
+    background-color: rgba(250, 167, 185, 0.781);
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
+
 .dropdown-content{
     position: absolute;
+    right: 20px;
     background-color: #f1f1f1;
     min-width: 325px;
     box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
@@ -175,7 +250,7 @@ nav ul a {
 }
 
 .dropdown-item-close{
-    position: aboslute;
+    position: absolute;
     top: 0;
     right: 0;
     font-size: 1.8rem;

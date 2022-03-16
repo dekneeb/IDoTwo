@@ -9,7 +9,7 @@
     {% endif %}
     <br/><br/>
     <div class=" detail_body">
-    <small> by @<a class="post_author" href='{% url "profile" %}'>{{item.user}}</a></small><br/>
+    <small> by {{item.user}}</small><br/>
     Price: ${{item.price}} || Location: {{item.city}}
     
     

@@ -135,8 +135,23 @@ class UserEditView(UpdateView):
 
 
 class Profile(TemplateView):
-   
     template_name='profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+
+        
+        title = self.request.GET.get('title')
+        print(title)
+        if title != None:
+            context['items'] = Item.objects.filter(title__icontains=title)
+            context['header'] = f"Results for {title}"
+        else:
+            context['items'] = Item.objects.all()
+            context['header'] = "I Do Two's"
+        return context
+
+
 
 
 

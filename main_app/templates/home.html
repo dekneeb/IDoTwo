@@ -2,9 +2,17 @@
 
 {% block content %}
 
+{% load static %}
+<body class="home">
 <br/>
 <h1>I Do Two</h1>
-<h4>Log in to get started</h4>
+<br/>
+<div class="center">
+<img class="homeicon" src="{% static 'images/flower.png' %}"/>
+</div>
+<br/>
+<h4>Login or Create a New Account to get started</h4>
+</body>
 
 
 {% endblock %}

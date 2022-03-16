@@ -17,35 +17,30 @@
     {% if user.is_authenticated %}
     
  <nav class="active navbar" id="nav">
+    <span> <img class="icon" style=" width: 90px; height: 90px; margin-right: 5px; margin-left: 10px; border-radius: 5px;" src="{% static 'images/flower.png' %}"/> <span  style="margin-right: 0;" class="navbar-item" style="margin-right: 5px;">Welcome: {{user.username}}</span>
+      </span>
     
-    
-    <span>
+    <span class="three-icon" style="float: right; margin-right: 0;">
     
     <button class="icon" id="toggle">
         <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/28/000000/external-flowers-tattoo-flaticons-lineal-color-flat-icons.png"/>
     </button>
-    <span style="margin-right: 0" class="navbar-item"> Welcome: {{user.username}}</span>
     <span class="navbar-item inbox-icon-container"><a class ='inbox-icon' href="/inbox/"><img src="https://img.icons8.com/emoji/25/000000/envelope-.png"/></a></span>
+    {% show_notification %}
     
-  
     <ul>
         <li><a class ='navbar-item'  id='toggle' href="/about">About</a></li>
-        <li><a class ='navbar-item' href="/items/new">Post</a></li>
-        <li><a class ='navbar-item' href="/items/">Items</a></li>
-        <li><a class="navbar-item" href="{% url 'edit_profile'%}">Edit Profile</a>
-        <li><a class=" navbar-item right_side_nav" href="{% url 'logout'%}">Logout</a></li>
+        <li><a class ='navbar-item' href="/items/new">Sell</a></li>
+        <li><a class ='navbar-item' href="/items/">Browse</a></li>
+        <li><a class=" navbar-item" href="{% url 'profile'%}">View Profile</a></li>
+        <li><a class=" navbar-item" href="{% url 'logout'%}">Logout</a></li>
     </ul>
+    
 </span>
-<img class="icon" style="float: right; width: 90px; height: 90px; margin-right: 20px; border-radius: 5px;" src="{% static 'images/flower.png' %}"/>
-       
-   <div class="navbar-item">
-    {% show_notification %}
-
-   </div>    
 </nav>
         {% else %}
         <div class="navbar-item">
-            <a class="navbar-item" href="{% url 'login'%}">Login</a>
+            <a class="navbar-item" href="{% url 'login'%}">Login</a> || 
             <a class="navbar-item" href="{% url 'signup'%}">Create a New Account</a>
         </div>
         {% endif %}
