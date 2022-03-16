@@ -53,6 +53,8 @@ h1, h4{
 .item_card{
     display: flex;
     justify-content: center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(66, 60, 26);
 
 }
 
@@ -106,6 +108,8 @@ h1, h4{
 
 .paragraph{
     margin-left: 20px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(66, 60, 26);
   
 
 }
@@ -114,6 +118,8 @@ h1, h4{
 .all_card p{
     display: flex;
     justify-content: center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(66, 60, 26);
 }
 
 nav.active ul {
@@ -169,6 +175,18 @@ nav ul a {
 .onebutton{
     display: flex;
     justify-content: center;
+    background-color: rgb(252, 224, 146);
+    color: rgb(168, 126, 77);
+    border: none;
+    border-radius: 3px;
+    box-shadow: rgba(107, 105, 105, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.onebutton:hover{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(252, 248, 248);
+    border: none;
 }
 .onebutton.active{
     display: none;

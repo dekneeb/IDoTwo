@@ -6,17 +6,6 @@
 <div class="form">
 <button id="onebutton" class="onebutton">Filter Results</button>
 <form class="mb-5 filter" id="search-field" method="get">
-    <!-- <span class="field has-addons">
-      <span class="control">
-        <input class="input" type="text" name="title" placeholder="Search by Title" />
-      </span>
-      <span class="control">
-        <input class="button is-success" type="submit" value="Search" />
-      </span>
-    </span>
-</form>
-     &nbsp; or &nbsp;
-<form class="mb-5 filter" id="search-field" method="get"> -->
     <span class="field has-addons">
         <span class="control">
             <input class="input" type="text" name="city" placeholder="Search by City" />
@@ -47,7 +36,7 @@
         </a>
             <p>@ {{item.created_on}}</p> 
             {{item.city}} ||
-                {{item.description | slice:":75"}}...
+            {{item.description | slice:":75"}}...
     </div>
 </div>
 
