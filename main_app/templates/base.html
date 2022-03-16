@@ -17,15 +17,15 @@
     {% if user.is_authenticated %}
     
  <nav class="active navbar" id="nav">
-    <span> <img class="icon" style=" width: 90px; height: 90px; margin-right: 5px; margin-left: 10px; border-radius: 5px;" src="{% static 'images/flower.png' %}"/> <span  style="margin-right: 0;" class="navbar-item" style="margin-right: 5px;">Welcome: {{user.username}}</span>
+    <span> <img class="icon" style=" width: 100px; height: 100px; margin-right: 5px; margin-left: 10px; border-radius: 5px;" src="{% static 'images/flower.png' %}"/> <span  style="margin-right: 0;" class="navbar-item" style="margin-right: 5px;">Welcome {{user.username}}</span>
       </span>
     
     <span class="three-icon" style="float: right; margin-right: 0;">
     
     <button class="icon" id="toggle">
-        <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/28/000000/external-flowers-tattoo-flaticons-lineal-color-flat-icons.png"/>
+        <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/40/000000/external-flowers-tattoo-flaticons-lineal-color-flat-icons.png"/>
     </button>
-    <span class="navbar-item inbox-icon-container"><a class ='inbox-icon' href="/inbox/"><img src="https://img.icons8.com/emoji/25/000000/envelope-.png"/></a></span>
+    <span class="navbar-item inbox-icon-container"><a class ='inbox-icon' href="/inbox/"><img src="https://img.icons8.com/emoji/35/000000/envelope-.png"/></a></span>
     {% show_notification %}
     
     <ul>

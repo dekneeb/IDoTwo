@@ -10,23 +10,26 @@
 {% for item in items %}
     
     {% if user.id == item.user.id %}
-    <div class="item_card">
-        <div class="all_card">
-            <hr>
-            <a href="{% url 'post_detail' item.pk%}">
-            {% if item.photos %}
-            <div class="photo">
-                <img class="picture" src="{{ item.photos.url }}"></div>
-            {% endif %}
-            <p><strong>{{item.title}} </strong> &nbsp; by {{item.user}} </p> 
-            </a>
+        <div class="item_card">
+            <div class="all_card">
+                <hr>
+                <a href="{% url 'post_detail' item.pk%}">
+                {% if item.photos %}
+                <div class="photo">
+                    <img class="picture" src="{{ item.photos.url }}"></div>
+                {% endif %}
+                <p><strong>{{item.title}} </strong> &nbsp; by {{item.user}} </p> 
+                 </a>
                 <p>@ {{item.created_on}}</p> 
                 {{item.city}} ||
                     {{item.description | slice:":75"}}...
+            </div>
         </div>
-    </div>
 
     {% endif %}
+
+{% empty %}
+<h2> No Items Listed for Sale Yet</h2>
 
 {% endfor %}
 

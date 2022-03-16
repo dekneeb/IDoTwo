@@ -48,7 +48,6 @@ class ItemList(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
 
-        
         title = self.request.GET.get('title')
         print(title)
         if title != None:
