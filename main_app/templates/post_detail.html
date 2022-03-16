@@ -1,33 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div>
+    <a class="navbar-item" href="{%url 'items_list'%}">Back to List Page</a>
+    </div>
 <h1 class="item_title">{{item.title}}</h1>
     
-
+   
     {% if item.photos %}
-    <div class="photo"><img class="picture" src="{{ item.photos.url }}"></div>
+
+    <div class="deetspan">
+       
+       
+        
+        <img class="deetpicture class col-md-10" src="{{ item.photos.url }}">
     {% endif %}
     <br/><br/>
-    <div class=" detail_body">
-    <small> by {{item.user}}</small><br/>
-    Price: ${{item.price}} || Location: {{item.city}}
+</div>
     
-    
-    <p>
-        Shipping available? 
-        {% if item.shipping == True%} 
-            Yes
-        {% else%}
-            No
-    </p>
-        {% endif %}
-        <p>Description: {{item.description}}</p>
-<br/>
+    <div class="paragraph">
+        <small> by <strong>{{item.user}}</strong></small><br/>
+        Price: ${{item.price}} || Location: {{item.city}}
+        
+        
+        <p>
+            Shipping available? 
+            {% if item.shipping == True%} 
+                Yes
+            {% else%}
+                No
+        </p>
+            {% endif %}
+            <p>Description: {{item.description}}</p>
+    <br/>
+    </div>
+
 
 
 <hr>
 <br/>
-
+<div class=" detail_body">
 <h2>Comments</h2>
 
 {% if not item.comments.all%}
@@ -53,7 +65,5 @@ No Comments Yet... <a href="{% url 'comment' item.pk %}">Add Comment</a>
         <div><a href='{% url "post_delete" item.pk %}'>Delete This Listing</a></div>
 
     {% endif %}
-<div>
-<a href="{%url 'items_list'%}">Back to List Page</a>
-</div>
+
 {% endblock %}

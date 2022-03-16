@@ -68,7 +68,21 @@ h1, h4{
     
 }
 
+.deetpicture{
+    height: 25%;
+    width: 25%;
+    border-radius: 5px;
+}
 
+.about{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 3%;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
 .list {
     display: grid;
@@ -81,6 +95,19 @@ h1, h4{
     display: flex;
     justify-content: center;
     
+}
+
+.deetspan{
+
+    display:flex;
+    justify-content: center;
+
+}
+
+.paragraph{
+    margin-left: 20px;
+  
+
 }
 
 
