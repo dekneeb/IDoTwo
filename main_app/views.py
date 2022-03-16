@@ -1,7 +1,6 @@
-from pdb import post_mortem
-import re
+
 # from xml.etree.ElementTree import Comment
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
