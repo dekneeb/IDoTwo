@@ -13,6 +13,7 @@ whitenoise = "*"
 environ = "*"
 django-environ = "*"
 boto3 = "*"
+pillow = "*"
 
 [dev-packages]
 
